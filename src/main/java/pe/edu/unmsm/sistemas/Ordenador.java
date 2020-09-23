@@ -9,7 +9,7 @@ import akka.actor.UntypedAbstractActor;
  */
 public class Ordenador extends UntypedAbstractActor {
     @Override
-    public void onReceive(Object message) throws Throwable {
+    public void onReceive(Object message) {
         if (message instanceof Ordenar) {
             Ordenar ordena = (Ordenar) message;
             Ordenar ordenando = ordenamiento(ordena.vec, ordena.ini, ordena.fin);
