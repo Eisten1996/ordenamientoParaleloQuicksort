@@ -18,9 +18,9 @@ public class Ordenador extends UntypedAbstractActor {
         }
     }
 
-    public Ordenar ordenamiento(int A[], int ini, int fin) {
+    public Ordenar ordenamiento(String A[], int ini, int fin) {
 
-        int o[] = new int[fin - ini];
+        String o[] = new String[fin - ini];
 
         int cont = 0;
         for (int i = ini; i < fin; i++) {
@@ -30,7 +30,7 @@ public class Ordenador extends UntypedAbstractActor {
         int n = o.length;
 
         QuickSort ob = new QuickSort();
-        ob.sort(o, 0, n - 1);
+        ob.sort(o);
 
 
         Ordenar ordenado = new Ordenar();

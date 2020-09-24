@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @project ordenamiento
  */
 public class Main {
-    int vec[];
+    String vec[];
 
     public static void main(String[] args) throws IOException {
         Main main1 = new Main();
@@ -29,16 +29,16 @@ public class Main {
 
     private void inicializar() throws IOException {
 
-        InputStream is = getClass().getClassLoader().getResourceAsStream("data.txt");
+        InputStream is = getClass().getClassLoader().getResourceAsStream("verbos-desorden.txt");
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(isr);
-        ArrayList<Integer> lista = new ArrayList<Integer>();
+        ArrayList<String> lista = new ArrayList<String>();
         String linea = br.readLine();
         while (linea != null) {
-            lista.add(Integer.parseInt(linea));
+            lista.add(linea);
             linea = br.readLine();
         }
-        vec = new int[lista.size()];
+        vec = new String[lista.size()];
 
         for (int i = 0; i < lista.size(); i++) {
             vec[i] = lista.get(i);

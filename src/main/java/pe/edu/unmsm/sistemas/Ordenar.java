@@ -7,5 +7,5 @@ package pe.edu.unmsm.sistemas;
 public class Ordenar {
     public int ini;
     public int fin;
-    public int vec[];
+    public String vec[];
 }

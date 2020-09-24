@@ -5,50 +5,51 @@ package pe.edu.unmsm.sistemas;
  * @project ordenamiento
  */
 public class QuickSort {
-    /* This function takes last element as pivot,
-       places the pivot element at its correct
-       position in sorted array, and places all
-       smaller (smaller than pivot) to left of
-       pivot and all greater elements to right
-       of pivot */
-    int partition(int arr[], int ini, int fin) {
-        int pivot = arr[fin];
-        int i = (ini - 1); // index of smaller element
-        for (int j = ini; j < fin; j++) {
-            // If current element is smaller than the pivot
-            if (arr[j] < pivot) {
-                i++;
+    String names[];
+    int length;
 
-                // swap arr[i] and arr[j]
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+    void sort(String array[]) {
+        if (array == null || array.length == 0) {
+            return;
+        }
+        this.names = array;
+        this.length = array.length;
+        quickSort(0, length - 1);
+    }
+
+    void quickSort(int lowerIndex, int higherIndex) {
+        int i = lowerIndex;
+        int j = higherIndex;
+        String pivot = this.names[lowerIndex + (higherIndex - lowerIndex) / 2];
+
+        while (i <= j) {
+            while (this.names[i].compareToIgnoreCase(pivot) < 0) {
+                i++;
+            }
+
+            while (this.names[j].compareToIgnoreCase(pivot) > 0) {
+                j--;
+            }
+
+            if (i <= j) {
+                exchangeNames(i, j);
+                i++;
+                j--;
             }
         }
-
-        // swap arr[i+1] and arr[fin] (or pivot)
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[fin];
-        arr[fin] = temp;
-
-        return i + 1;
-    }
-
-
-    /* The main function that implements QuickSort()
-      arr[] --> Array to be sorted,
-      ini  --> Starting index,
-      fin  --> Ending index */
-    void sort(int arr[], int ini, int fin) {
-        if (ini < fin) {
-            /* pi is partitioning index, arr[pi] is
-              now at right place */
-            int pi = partition(arr, ini, fin);
-
-            // Recursively sort elements before
-            // partition and after partition
-            sort(arr, ini, pi - 1);
-            sort(arr, pi + 1, fin);
+        //call quickSort recursively
+        if (lowerIndex < j) {
+            quickSort(lowerIndex, j);
+        }
+        if (i < higherIndex) {
+            quickSort(i, higherIndex);
         }
     }
+
+    void exchangeNames(int i, int j) {
+        String temp = this.names[i];
+        this.names[i] = this.names[j];
+        this.names[j] = temp;
+    }
+
 }

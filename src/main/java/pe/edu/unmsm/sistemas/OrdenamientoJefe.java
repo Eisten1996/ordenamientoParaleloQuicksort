@@ -10,15 +10,15 @@ import akka.actor.UntypedAbstractActor;
  */
 public class OrdenamientoJefe extends UntypedAbstractActor {
 
-    private int vec1[];
+    private String vec1[];
 
-    private int vectorParcial1[];
-    private int vectorParcial2[];
-    private int vectorParcial3[];
-    private int vectorParcial4[];
+    private String vectorParcial1[];
+    private String vectorParcial2[];
+    private String vectorParcial3[];
+    private String vectorParcial4[];
 
-    private int vectorTotal1[];
-    private int vectorTotal2[];
+    private String vectorTotal1[];
+    private String vectorTotal2[];
     private Ordenar vec2[];
     private int seg = 0;
 
@@ -28,32 +28,33 @@ public class OrdenamientoJefe extends UntypedAbstractActor {
 
 
         if (message instanceof Ordenar) {
+
             vec2[seg] = (Ordenar) message;
             if (seg == 0) {
-                vectorParcial1 = new int[vec2[seg].vec.length];
+                vectorParcial1 = new String[vec2[seg].vec.length];
                 int cont = 0;
-                for (int n : vec2[seg].vec) {
+                for (String n : vec2[seg].vec) {
                     vectorParcial1[cont] = n;
                     cont++;
                 }
             } else if (seg == 1) {
-                vectorParcial2 = new int[vec2[seg].vec.length];
+                vectorParcial2 = new String[vec2[seg].vec.length];
                 int cont = 0;
-                for (int n : vec2[seg].vec) {
+                for (String n : vec2[seg].vec) {
                     vectorParcial2[cont] = n;
                     cont++;
                 }
             } else if (seg == 2) {
-                vectorParcial3 = new int[vec2[seg].vec.length];
+                vectorParcial3 = new String[vec2[seg].vec.length];
                 int cont = 0;
-                for (int n : vec2[seg].vec) {
+                for (String n : vec2[seg].vec) {
                     vectorParcial3[cont] = n;
                     cont++;
                 }
             } else if (seg == 3) {
-                vectorParcial4 = new int[vec2[seg].vec.length];
+                vectorParcial4 = new String[vec2[seg].vec.length];
                 int cont = 0;
-                for (int n : vec2[seg].vec) {
+                for (String n : vec2[seg].vec) {
                     vectorParcial4[cont] = n;
                     cont++;
                 }
@@ -63,13 +64,18 @@ public class OrdenamientoJefe extends UntypedAbstractActor {
             if (seg == 4) {
                 vectorTotal1 = ordenandoPartes(vectorParcial1, vectorParcial2);
                 vectorTotal2 = ordenandoPartes(vectorParcial3, vectorParcial4);
-                for (int n : ordenandoPartes(vectorTotal1, vectorTotal2)) System.out.printf("%d - ", n);
+                int cont = 0;
+                for (String n : ordenandoPartes(vectorTotal1, vectorTotal2)) {
+                    System.err.println("palabras[" + cont + "]=" + n);
+                    cont++;
+                }
+                ;
 
                 this.getContext().stop(getSelf());
             }
-        } else if (message instanceof int[]) {
+        } else if (message instanceof String[]) {
             seg = 0;
-            vec1 = (int[]) message;
+            vec1 = (String[]) message;
             Ordenar ordenar[] = new Ordenar[4];
             ActorRef ordenador[] = new ActorRef[4];
 
@@ -86,12 +92,12 @@ public class OrdenamientoJefe extends UntypedAbstractActor {
         }
     }
 
-    public int[] ordenandoPartes(int[] vector1, int[] vector2) {
-        int resultado[] = new int[(vector1.length + vector2.length)];
+    public String[] ordenandoPartes(String[] vector1, String[] vector2) {
+        String resultado[] = new String[(vector1.length + vector2.length)];
         System.arraycopy(vector1, 0, resultado, 0, vector1.length);
         System.arraycopy(vector2, 0, resultado, vector1.length, vector2.length);
         QuickSort ob = new QuickSort();
-        ob.sort(resultado, 0, resultado.length - 1);
+        ob.sort(resultado);
         return resultado;
     }
 
